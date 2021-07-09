@@ -22,12 +22,7 @@ function add(){
     arts = document.querySelectorAll("article");
     //console.log(arts);
   arts.forEach(art=>{
-      //0001111
-      // var ele = art.children[0].children[0].children[0]
-      // .children[1].children[1].children[1].children[2].children[3]
-
-      // var butEle = art.children[0].children[0].children[0]
-      // .children[1].children[1].children[1].children[2].children[4]
+     
       var ele = art.children[0].children[0].lastChild
       var butEle = art.children[0].children[0].children[1];
       if(butEle==null){
@@ -35,7 +30,7 @@ function add(){
         but.innerHTML="Save"
         but.classList.add("saveTweet")
         ele.after(but)
-        chrome.runtime.sendMessage({message: "listeners"}, function(response) {
+        chrome.runtime.sendMessage({message: "listeners", data:{article:art,button:but}}, function(response) {
           console.log("")
         });
       }
