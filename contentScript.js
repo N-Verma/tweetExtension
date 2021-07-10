@@ -6,7 +6,6 @@ chrome.storage.sync.get({
   threshold = items.threshold;
 });
 function DOMModificationHandler(){
-  //console.log("I am here event handler")
   document.getElementById("react-root").removeEventListener('DOMSubtreeModified',DOMModificationHandler);
     setTimeout(function(){
         add();
@@ -16,11 +15,7 @@ function DOMModificationHandler(){
 document.getElementById("react-root").addEventListener('DOMSubtreeModified',DOMModificationHandler);
 
 function add(){
-  
-  var arts
-  //setTimeout(()=>{
-    arts = document.querySelectorAll("article");
-    //console.log(arts);
+    var arts = document.querySelectorAll("article");
   arts.forEach(art=>{
      
       var ele = art.children[0].children[0].lastChild
@@ -28,15 +23,12 @@ function add(){
       if(butEle==null){
         var but = document.createElement("button");
         but.innerHTML="Save"
-        but.classList.add("saveTweet")
+        but.value = art.querySelectorAll("a")[2].href
+        but.classList.add('saveTweet')
         ele.after(but)
-        chrome.runtime.sendMessage({message: "listeners", data:{article:art,button:but}}, function(response) {
-          console.log("")
-        });
+        chrome.runtime.sendMessage({message: "listeners"})
       }
       
   })
-  //},5000)
 }
-// add()
 
