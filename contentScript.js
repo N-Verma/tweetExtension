@@ -23,8 +23,18 @@ function add(){
       if(butEle==null){
         var but = document.createElement("button");
         but.innerHTML="Save"
-        but.value = art.querySelectorAll("a")[2].href
+        art.querySelectorAll("a").forEach(link=>{
+          if(link.id.length!=0){
+            but.value = link.href
+          }
+        })
+        //but.value = art.querySelectorAll("a")[art.querySelectorAll("a").length-1].href
         but.classList.add('saveTweet')
+
+        but.addEventListener('click',function(){
+          console.log(but.value)
+        })
+
         ele.after(but)
         chrome.runtime.sendMessage({message: "listeners"})
       }
