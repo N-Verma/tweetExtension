@@ -24,8 +24,14 @@ function add(){
         var but = document.createElement("button");
         but.innerHTML="Save"
         art.querySelectorAll("a").forEach(link=>{
-          if(link.id.length!=0){
+          if(link.id.length!=0 ) {
+               if(/\d/.test(link))
+               {
             but.value = link.href
+               }
+               else{
+                 but.value=window.location.pathname
+               }
           }
         })
         //but.value = art.querySelectorAll("a")[art.querySelectorAll("a").length-1].href
