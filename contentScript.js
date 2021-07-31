@@ -13,7 +13,9 @@ function DOMModificationHandler(){
     },10);
 }
 document.getElementById("react-root").addEventListener('DOMSubtreeModified',DOMModificationHandler);
-
+chrome.runtime.connect().onDisconnect.addListener(function() {
+  // clean up when content script gets disconnected
+})
 function add(){
     var arts = document.querySelectorAll("article");
   arts.forEach(art=>{
@@ -41,17 +43,17 @@ function add(){
       
         if(but.value==="")
         {
-          but.value=window.location.pathname
+          but.value='https://twitter.com'+window.location.pathname
         }
         but.classList.add('saveTweet')
 
         but.addEventListener('click',function(){
   
-          console.log("Value",but.value)
+          console.log(but.value)
         })
 
         ele.after(but)
-        chrome.runtime.sendMessage({message: "listeners"})
+        //chrome.runtime.sendMessage({message: "listeners"})
       }
       
   })
